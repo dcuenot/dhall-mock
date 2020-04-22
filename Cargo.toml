@@ -10,7 +10,8 @@ edition = "2018"
 [dependencies]
 serde = "1.0"
 serde_json = "1.0"
-serde_dhall = "0.5"
+# Fork to remove dependency on openssl-sys
+serde_dhall = { git = "https://github.com/fteychene/dhall-rust",  version = "0.5" }
 anyhow = "1.0"
 thiserror = "1.0"
 log = "0.4"
@@ -22,4 +23,4 @@ tokio = { version = "0.2", features = ["full", "time"] }
 bytes = "0.5"
 structopt = "0.3"
 signal-hook = "0.1"
-reqwest = { version = "0.10", features = ["blocking", "rustls-tls"] }
+reqwest = { version = "0.10", default-features = false, features = ["blocking", "rustls-tls"] }
