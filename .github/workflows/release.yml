@@ -3,7 +3,7 @@ on:
     tags:
       - 'v*'
 
-name: Create Release on v* tag
+name: Create Release
 
 jobs:
   build:
