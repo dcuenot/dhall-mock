@@ -14,15 +14,15 @@ jobs:
         uses: actions/checkout@master
       - name: Install rust
         uses: actions-rs/toolchain@v1
-          with:
-            profile: minimal
-            toolchain: stable
-            override: true
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
       - name: Build release binary
         uses: actions-rs/cargo@v1
-          with:
-            command: build
-            args: --release
+        with:
+          command: build
+          args: --release
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
