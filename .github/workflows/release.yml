@@ -46,7 +46,7 @@ jobs:
             Changes in this Release :
           draft: true
           prerelease: false
-      - name: Upload musl release binary
+      - name: Upload Linux gnu binary
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -55,7 +55,7 @@ jobs:
           asset_path: target/x86_64-unknown-linux-gnu/release/main
           asset_name: dhall-mock-server-x86_64-linux-gnu
           asset_content_type: application/octet-stream
-      - name: Upload musl release binary
+      - name: Upload Linux musl binary
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
