@@ -5,6 +5,8 @@ on:
 
 name: Create Release
 
+# TODO check about matrix for target
+
 jobs:
   build:
     name: Create Release
@@ -45,7 +47,6 @@ jobs:
           draft: true
           prerelease: false
       - name: Upload musl release binary
-        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -55,7 +56,6 @@ jobs:
           asset_name: dhall-mock-server-x86_64-linux-gnu
           asset_content_type: application/octet-stream
       - name: Upload musl release binary
-        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
