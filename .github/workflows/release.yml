@@ -20,28 +20,16 @@ jobs:
           override: true
       - name: Build Linux gnu release binary
         uses: actions-rs/cargo@v1
-        env:
-          PKG_CONFIG_ALLOW_CROSS: 1
         with:
           use-cross: true
           command: build
           args: --target x86_64-unknown-linux-gnu
       - name: Build Linux musl release binary
         uses: actions-rs/cargo@v1
-        env:
-          PKG_CONFIG_ALLOW_CROSS: 1
         with:
           use-cross: true
           command: build
           args: --target x86_64-unknown-linux-musl
-      - name: Build Mac release binary
-        uses: actions-rs/cargo@v1
-        env:
-          PKG_CONFIG_ALLOW_CROSS: 1
-        with:
-          use-cross: true
-          command: build
-          args: --target x86_64-apple-darwin
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
@@ -56,13 +44,23 @@ jobs:
             Changes in this Release :
           draft: true
           prerelease: false
-      - name: Upload Release Asset
+      - name: Upload musl release binary
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: target/release/main
-          asset_name: dhall-mock-server
+          asset_path: target/x86_64-unknown-linux-gnu/release/main
+          asset_name: dhall-mock-server-x86_64-linux-gnu
+          asset_content_type: application/octet-stream
+      - name: Upload musl release binary
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: target/x86_64-unknown-linux-musl/release/main
+          asset_name: dhall-mock-server-x86_64-linux-musl
           asset_content_type: application/octet-stream
